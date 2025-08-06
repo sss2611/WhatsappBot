@@ -20,8 +20,7 @@ cd backend
 npm install
 
 🔐 Configuración del archivo .env
-MONGODB_URI=mongodb+srv://usuario:clave@cluster.mongodb.net/ss2611?retryWrites=true&w=majority
-SESSION_ID=ss2611bot
+MONGODB_URI= aqui va la config
 
 🚀 Inicio del bot
 bash
