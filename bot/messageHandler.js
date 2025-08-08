@@ -1,5 +1,5 @@
 module.exports = (message, client) => {
-  const text = message.body.toLowerCase(); // Convierte todo a minúsculas
+  const text = message.body.toLowerCase(); 
 
   if (text === 'hola') {
     message.reply('¡Hola! ¿En qué puedo ayudarte?');
@@ -8,4 +8,4 @@ module.exports = (message, client) => {
   } else if (text.includes('precio')) {
     message.reply('Nuestros precios varían según el producto. ¿Qué te interesa?');
   }
-};s
+};
