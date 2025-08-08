@@ -16,11 +16,22 @@ router.post('/send-message', async (req, res) => {
         return res.status(400).json({ error: 'Faltan número o mensaje' });
     }
 
+    // Validación más estricta del número
+    const isValidNumber = /^\d{10,15}$/.test(number);
+    if (!isValidNumber) {
+        return res.status(400).json({ error: 'Número inválido' });
+    }
+    
     const formattedNumber = number.includes('@c.us') ? number : `${number}@c.us`;
 
     try {
         await client.sendMessage(formattedNumber, message);
-        res.json({ status: 'enviado' });
+        res.json({
+            status: 'enviado',
+            to: formattedNumber,
+            message
+        });
+
     } catch (err) {
         console.error('❌ Error al enviar mensaje:', err);
         res.status(500).json({ error: err.message });
