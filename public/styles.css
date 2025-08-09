@@ -1,0 +1,73 @@
+/* 🌐 Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+    padding: 2rem;
+    max-width: 600px;
+    margin: auto;
+}
+
+/* 🧭 Título principal */
+h1 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #005f99;
+    text-align: center;
+}
+
+/* 📊 Estado del bot */
+#estado {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    border-left: 4px solid #005f99;
+    background-color: #e6f2ff;
+}
+
+/* 📱 Número vinculado */
+#numero {
+    font-style: italic;
+    margin-bottom: 1rem;
+    color: #555;
+}
+
+/* 🖼️ Contenedor del QR */
+#qr {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+#qr img {
+    border: 2px solid #ccc;
+    padding: 10px;
+    background-color: #fff;
+    max-width: 100%;
+    height: auto;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* 🧪 SweetAlert2 override (opcional) */
+.swal2-popup {
+    font-size: 1rem !important;
+}
+
+/* 📦 Recuadro para número vinculado */
+#numero {
+    font-style: normal;
+    font-weight: 500;
+    color: #222;
+    background-color: #e8f5e9;
+    border-left: 4px solid #4caf50;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
