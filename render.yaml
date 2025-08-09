@@ -6,6 +6,8 @@ services:
     region: oregon
     buildCommand: npm install && npx puppeteer install
     startCommand: npm start
+    # buildCommand: yarn install
+    # startCommand: yarn start
     autoDeploy: true
     envVars:
       - key: NODE_ENV
