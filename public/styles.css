@@ -8,14 +8,35 @@
 /* Tipografía y fondo */
 body {
     font-family: 'Segoe UI', Roboto, sans-serif;
-    background-color: #f9f9f9;
+    background-color: black;
     color: #333;
     padding: 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    position: relative;
+    z-index: 0;
 }
+
+/* Capa de fondo con transparencia */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-image: url('/public/logo/logo.jpg'); /* ✅ sin /public */
+    background-size: contain; /* ✅ Evita recorte, mantiene proporción */
+    background-position: center center; /* ✅ Centrado en ambas direcciones */
+    background-repeat: no-repeat;
+    opacity: 0.2;
+    z-index: -1;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+
 
 /* Contenedor principal */
 main {
