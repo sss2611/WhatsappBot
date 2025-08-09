@@ -4,6 +4,7 @@ const apiRoutes = require('./routes/api');
 const cors = require('cors');
 const morgan = require('morgan');
 const { limpiarSesionLocal } = require('./bot/sessionCleaner');
+const launchBrowser = require('./services/launchBrowser');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
