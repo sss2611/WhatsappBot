@@ -44,4 +44,8 @@ router.post('/send-message', async (req, res) => {
     }
 });
 
+router.get('/status', (req, res) => {
+    res.json({ status: 'ok', timestamp: Date.now() });
+});
+
 module.exports = router;

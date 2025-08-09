@@ -2,7 +2,6 @@
 node_modules/
 
 # Sesión de whatsapp-web.js
-.wwebjs_auth/
 *.sqlite
 
 # Variables de entorno

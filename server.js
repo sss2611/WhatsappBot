@@ -7,6 +7,7 @@ const apiRoutes = require('./routes/api');
 const { limpiarSesionLocal } = require('./bot/sessionCleaner');
 const launchBrowser = require('./services/launchBrowser');
 const emitirQR = require('./bot/emitirQR');
+const handleMessage = require('./bot/messageHandler');
 
 const { default: makeWASocket, useMultiFileAuthState } = require('@whiskeysockets/baileys');
 
@@ -33,12 +34,13 @@ wss.on('connection', async (ws) => {
         browser: ['SandraBot', 'Chrome', '1.0'],
     });
 
-    sock.ev.on('creds.update', saveCreds);
+    sock.ev.on('creds.update', async () => {
+        console.log('💾 Credenciales actualizadas');
+        await saveCreds();
+    });
 
     sock.ev.on('connection.update', (update) => {
         const { qr, connection, lastDisconnect } = update;
-
-        if (qr) emitirQR(ws, qr); // 🧩 QR modular
 
         if (connection === 'open') {
             ws.send(JSON.stringify({ status: 'vinculado' }));
@@ -46,14 +48,30 @@ wss.on('connection', async (ws) => {
         }
 
         if (connection === 'close') {
+            const reason = lastDisconnect?.error?.output?.statusCode;
+            console.log('❌ Bot desconectado. Código:', reason);
             ws.send(JSON.stringify({ status: 'desconectado' }));
-            console.log('❌ Bot desconectado');
         }
 
         if (connection === 'connecting') {
             ws.send(JSON.stringify({ status: 'conectando' }));
             console.log('⏳ Conectando...');
         }
+
+        if (qr && connection !== 'open') {
+            emitirQR(ws, qr);
+            console.log('🟡 QR generado');
+        }
+    });
+
+    sock.ev.on('messages.upsert', async ({ messages, type }) => {
+        console.log('🧠 Evento messages.upsert recibido');
+        if (type !== 'notify') return;
+        const msg = messages[0];
+        if (!msg.message) return;
+
+        console.log('📩 Mensaje detectado:', msg.key.remoteJid);
+        await handleMessage(msg, sock);
     });
 
     ws.on('close', () => {
@@ -71,7 +89,7 @@ wss.on('connection', async (ws) => {
     }
 })();
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 server.listen(PORT, () => console.log(`🚀 Servidor activo en puerto ${PORT}`));
 
 // 🧹 Limpieza al cerrar el proceso
