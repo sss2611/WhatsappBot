@@ -11,6 +11,7 @@
   "license": "ISC",
   "description": "Sistema modular para enviar mensajes por WhatsApp desde un panel web visual, conectado a MongoDB Atlas y desplegado profesionalmente.   Ideal para automatización de negocios, gestión de clientes, y extensible a múltiples bots o números.",
   "dependencies": {
+    "@whiskeysockets/baileys": "^6.7.18",
     "cors": "^2.8.5",
     "express": "^5.1.0",
     "morgan": "^1.10.1",
