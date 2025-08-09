@@ -14,6 +14,7 @@ const { default: makeWASocket, useMultiFileAuthState } = require('@whiskeysocket
 const app = express();
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
+const path = require('path');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -21,6 +22,11 @@ app.use(cors());
 app.use(morgan('dev'));
 app.use(express.static('public'));
 app.use('/api', apiRoutes);
+
+// Servir index.html explícitamente en la raíz
+app.get('/', (_, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 
 // 🌐 WebSocket + Baileys
 wss.on('connection', async (ws) => {
