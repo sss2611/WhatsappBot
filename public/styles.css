@@ -27,7 +27,7 @@ body::before {
     left: 0;
     height: 100%;
     width: 100%;
-    background-image: url('/public/logo/logo.jpg'); /* ✅ sin /public */
+    background-image: url('/logo/logo.jpg'); /* ✅ sin /public */
     background-size: contain; /* ✅ Evita recorte, mantiene proporción */
     background-position: center center; /* ✅ Centrado en ambas direcciones */
     background-repeat: no-repeat;
