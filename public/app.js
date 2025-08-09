@@ -69,18 +69,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 estadoEl.textContent = '🔴 Bot no conectado';
                 numeroEl.textContent = '';
                 qrEl.innerHTML = '';
+
                 if (qr?.startsWith('data:image')) {
-                    Swal.fire({
-                        title: 'Escanea el QR para vincular',
-                        imageUrl: qr,
-                        imageAlt: 'QR de vinculación',
-                        confirmButtonText: 'Cerrar',
-                        width: 350
-                    });
                     const img = document.createElement('img');
                     img.src = qr;
                     img.alt = 'Escanea el QR para vincular';
                     img.style.maxWidth = '300px';
+                    img.style.borderRadius = '8px';
+                    img.style.boxShadow = '0 0 10px rgba(0,0,0,0.1)';
                     qrEl.innerHTML = '';
                     qrEl.appendChild(img);
                 }
