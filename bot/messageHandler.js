@@ -11,7 +11,9 @@
 // };
 
 module.exports = async (msg, sock) => {
+  if (!msg?.key?.remoteJid) return;
   const jid = msg.key.remoteJid;
+
   const isFromMe = msg.key.fromMe;
   const isGroup = jid.endsWith('@g.us');
 
