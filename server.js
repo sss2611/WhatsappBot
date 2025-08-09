@@ -89,7 +89,7 @@ wss.on('connection', async (ws) => {
     }
 })();
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 1000;
 server.listen(PORT, () => console.log(`🚀 Servidor activo en puerto ${PORT}`));
 
 // 🧹 Limpieza al cerrar el proceso
