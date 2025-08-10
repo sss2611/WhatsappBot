@@ -60,7 +60,7 @@ Subí el proyecto o conectá tu repo.
 
 Configurá las variables de entorno:
 
-PORT=3000
+PORT=1000
 
 SESSION_PATH=./sessions
 
@@ -74,7 +74,7 @@ GET /api/qr → QR en base64
 GET /api/number → Número vinculado
 
 🧠 Requisitos
-Node.js 18+
+Node.js 20+
 
 Baileys actualizado
 
