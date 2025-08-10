@@ -52,23 +52,13 @@
 // module.exports = launchBrowser;
 
 // CHROMIUM_PATH = /usr/bin/chromium-browser variable para render
-
-const puppeteer = require('puppeteer-core');
-const chromium = require('chrome-aws-lambda'); // opcional para entornos serverless
+const puppeteer = require('puppeteer');
 
 async function launchBrowser() {
-    const executablePath = process.env.CHROMIUM_PATH || chromium.executablePath;
-
-    if (!executablePath || !fs.existsSync(executablePath)) {
-        console.warn(`⚠️ Chromium no encontrado en: ${executablePath}`);
-        throw new Error('❌ No se encontró Chromium en el sistema ni en CHROMIUM_PATH');
-    }
-
     try {
         const browser = await puppeteer.launch({
             headless: 'new',
             args: ['--no-sandbox', '--disable-setuid-sandbox'],
-            executablePath,
         });
 
         console.log('🧠 Puppeteer lanzado correctamente');
@@ -78,3 +68,5 @@ async function launchBrowser() {
         throw err;
     }
 }
+
+module.exports = launchBrowser;
