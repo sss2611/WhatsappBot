@@ -6,7 +6,6 @@ services:
     region: oregon
 
     buildCommand: npm ci
-    postInstallCommand: npx puppeteer install
     startCommand: npm start
     autoDeploy: true
 
@@ -17,8 +16,8 @@ services:
       - key: PUPPETEER_SKIP_CHROMIUM_DOWNLOAD
         value: true
 
-      - key: PORT
-        value: ${PORT}
+      - key: CHROMIUM_PATH
+        value: /usr/bin/chromium-browser
 
       - key: OPENAI_API_KEY
         value: k-proj-1ENlmBurI8rt8iCdF1P2WZzjBX_Q6_LTKTWwjilq5VbFc-jbrtQPKm74-8YDuzEy4ScbeSb6SmT3BlbkFJZG6B57NQLo-B0QD5iqHxnZN4SR4rlHJ_x8Txfkfxj7fA8YwOJSHwJxDZrnrMRpYHlIqxYeNg0A

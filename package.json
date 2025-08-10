@@ -5,8 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "npx puppeteer install"
+    "start:render": "node envCheck.js && node server.js",
+    "puppeteer:install": "npx puppeteer install"
   },
   "keywords": [],
   "author": "",
@@ -22,7 +22,7 @@
     "express": "^5.1.0",
     "jimp": "^0.16.13",
     "morgan": "^1.10.1",
-    "puppeteer": "^21.3.8",
+    "puppeteer-core": "^24.16.0",
     "qrcode": "^1.5.4",
     "sharp": "^0.32.6",
     "whatsapp-web.js": "^1.32.0"
