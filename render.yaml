@@ -1,3 +1,30 @@
+# services:
+#   - type: web
+#     name: esTODOMADERA-Bot
+#     env: node
+#     plan: free
+#     region: oregon
+
+#     buildCommand: npm ci
+#     startCommand: npm start
+#     autoDeploy: true
+
+#     envVars:
+#       - key: NODE_ENV
+#         value: production
+
+#       - key: PUPPETEER_SKIP_CHROMIUM_DOWNLOAD
+#         value: true
+
+#       - key: CHROMIUM_PATH
+#         value: /usr/bin/chromium-browser
+
+#       - key: OPENAI_API_KEY
+#         value: k-proj-1ENlmBurI8rt8iCdF1P2WZzjBX_Q6_LTKTWwjilq5VbFc-jbrtQPKm74-8YDuzEy4ScbeSb6SmT3BlbkFJZG6B57NQLo-B0QD5iqHxnZN4SR4rlHJ_x8Txfkfxj7fA8YwOJSHwJxDZrnrMRpYHlIqxYeNg0A
+
+#       - key: WHATSAPP_SESSION_PATH
+#         value: ./auth/session.json
+
 services:
   - type: web
     name: esTODOMADERA-Bot
@@ -13,14 +40,10 @@ services:
       - key: NODE_ENV
         value: production
 
-      - key: PUPPETEER_SKIP_CHROMIUM_DOWNLOAD
-        value: true
-
-      - key: CHROMIUM_PATH
-        value: /usr/bin/chromium-browser
-
       - key: OPENAI_API_KEY
         value: k-proj-1ENlmBurI8rt8iCdF1P2WZzjBX_Q6_LTKTWwjilq5VbFc-jbrtQPKm74-8YDuzEy4ScbeSb6SmT3BlbkFJZG6B57NQLo-B0QD5iqHxnZN4SR4rlHJ_x8Txfkfxj7fA8YwOJSHwJxDZrnrMRpYHlIqxYeNg0A
 
       - key: WHATSAPP_SESSION_PATH
         value: ./auth/session.json
+
+    postInstallCommand: npx puppeteer install
