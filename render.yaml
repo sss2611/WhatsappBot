@@ -6,11 +6,20 @@ services:
     region: oregon
     buildCommand: npm install && npx puppeteer install
     startCommand: npm start
-    # buildCommand: yarn install
-    # startCommand: yarn start
     autoDeploy: true
+
     envVars:
       - key: NODE_ENV
         value: production
+
       - key: PUPPETEER_SKIP_CHROMIUM_DOWNLOAD
         value: false
+
+      - key: PORT
+        value: 1000
+
+      - key: OPENAI_API_KEY
+        value: tu_clave_aqui
+
+      - key: WHATSAPP_SESSION_PATH
+        value: ./auth/session.json
