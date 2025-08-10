@@ -1,47 +1,47 @@
-// module.exports = (message, client) => {
-//   const text = message.body.toLowerCase(); 
-
-//   if (text === 'hola') {
-//     message.reply('¡Hola! ¿En qué puedo ayudarte?');
-//   } else if (text === 'info') {
-//     message.reply('Puedes visitar nuestro Facebook para mas información: https://www.facebook.com/groups/507296329349636/user/100026735442194/?locale=es_LA.');
-//   } else if (text.includes('precio')) {
-//     message.reply('Nuestros precios varían según el producto. ¿Qué te interesa?');
-//   }
-// };
+const { hasBeenGreeted, markAsGreeted } = require('./handlers/greetedUsers');
+const { getReply } = require('./handlers/replyController');
+const { getAIReply } = require('./handlers/aiResponder');
 
 module.exports = async (msg, sock) => {
   if (!msg?.key?.remoteJid) return;
-  const jid = msg.key.remoteJid;
 
-  const isFromMe = msg.key.fromMe;
+  const jid = msg.key.remoteJid;
   const isGroup = jid.endsWith('@g.us');
+  if (isGroup) return; // Solo responder en chats privados
 
   // 🧩 Extraer texto del mensaje
-  const text =
+    const text =
     msg.message?.conversation ||
     msg.message?.extendedTextMessage?.text ||
     msg.message?.imageMessage?.caption ||
-    '';
+    null;
 
-  if (!text) {
-    console.log('⚠️ Mensaje sin texto, ignorado');
+if (!text) return; // Evitás pasar undefined
+
+await getReply(sock, jid, text);
+
+
+  const lowerText = text.toLowerCase();
+  console.log(`📩 Mensaje recibido de ${jid}: ${lowerText}`);
+
+  // 🟨 Saludo inicial si es la primera vez
+  if (!hasBeenGreeted(jid)) {
+    await sock.sendMessage(jid, {
+      text: 'Somos EsTODOMADERA, madera que dura, confianza que crece 💫',
+    });
+    markAsGreeted(jid);
+  }
+
+  // 🧠 Respuesta automática si coincide con comando
+  const reply = await getReply(lowerText);
+  if (reply) {
+    await sock.sendMessage(jid, { text: reply });
     return;
   }
 
-  const lowerText = text.toLowerCase();
-  console.log(`📩 Mensaje recibido: ${lowerText}`);
-
-  // 🧠 Lógica de respuesta
-  if (lowerText === 'hola') {
-    await sock.sendMessage(jid, { text: '¡Hola! ¿En qué puedo ayudarte?' });
-  } else if (lowerText === 'info') {
-    await sock.sendMessage(jid, {
-      text: 'Puedes visitar nuestro Facebook para más información: https://www.facebook.com/groups/507296329349636/user/100026735442194/?locale=es_LA.',
-    });
-  } else if (lowerText.includes('precio')) {
-    await sock.sendMessage(jid, {
-      text: 'Nuestros precios varían según el producto. ¿Qué te interesa?',
-    });
-  }
+  // 🤖 Fallback a IA si no hay coincidencia
+  const aiReply = await getAIReply(lowerText);
+  await sock.sendMessage(jid, { text: aiReply });
+  return aiReply;
 };
+

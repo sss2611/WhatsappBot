@@ -19,6 +19,14 @@ Bot WhatsApp con arquitectura limpia, trazable y lista para producción. Integra
 
 WhatsappBot/
 ├── bot/                  # 🧠 Núcleo del bot: lógica, sesión y manejo de mensajes
+|   └── handlers/
+│   │    ├── aiResponder.js        ←
+│   │    ├── greetedUsers.js       ← Control de saludos persistentes
+│   │    ├── greetedUsers.json     ← Persistencia local
+│   │    ├── openaiClient.js       ← 
+│   │    ├── openaiConfig.js       ← 
+│   │    └── replyController.js    ← Respuestas según mensaje
+|   │
 │   ├── index.js          # Inicializa el bot y gestiona eventos principales
 │   ├── messageHandler.js # Procesa mensajes entrantes y respuestas
 │   ├── session.js        # Control de sesión activa y estado vinculado

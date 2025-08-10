@@ -46,6 +46,12 @@ document.addEventListener('DOMContentLoaded', () => {
             if (msg.status === 'ready') {
                 console.log('🟢 WebSocket listo para recibir eventos');
             }
+
+            if (msg.respuesta) {
+                console.log('🤖 Respuesta recibida:', msg.respuesta);
+                mostrarRespuesta(msg.respuesta); // ← esta función la definís abajo
+            }
+
         } catch (err) {
             console.error('❌ Error al procesar mensaje WebSocket:', err);
         }
@@ -96,3 +102,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 });
+
+function mostrarRespuesta(texto) {
+    Swal.fire({
+        title: 'Respuesta del bot',
+        text: texto,
+        icon: 'info',
+        confirmButtonText: 'OK',
+        customClass: {
+            popup: 'swal2-popup-custom'
+        }
+    });
+}
