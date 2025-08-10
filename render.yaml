@@ -1,10 +1,12 @@
 services:
   - type: web
-    name: whatsapp-bot
+    name: esTODOMADERA-Bot
     env: node
     plan: free
     region: oregon
-    buildCommand: npm install && npx puppeteer install
+
+    buildCommand: npm ci
+    postInstallCommand: npx puppeteer install
     startCommand: npm start
     autoDeploy: true
 
@@ -13,13 +15,13 @@ services:
         value: production
 
       - key: PUPPETEER_SKIP_CHROMIUM_DOWNLOAD
-        value: false
+        value: true
 
       - key: PORT
-        value: 1000
+        value: ${PORT}
 
       - key: OPENAI_API_KEY
-        value: tu_clave_aqui
+        value: k-proj-1ENlmBurI8rt8iCdF1P2WZzjBX_Q6_LTKTWwjilq5VbFc-jbrtQPKm74-8YDuzEy4ScbeSb6SmT3BlbkFJZG6B57NQLo-B0QD5iqHxnZN4SR4rlHJ_x8Txfkfxj7fA8YwOJSHwJxDZrnrMRpYHlIqxYeNg0A
 
       - key: WHATSAPP_SESSION_PATH
         value: ./auth/session.json
